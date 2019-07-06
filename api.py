@@ -86,5 +86,16 @@ def api_id_post():
         return jsonify(results)
     return "Error on request"
 
+
+"""This is action that will be called when running the api
+    Returns json data"""
+    # IMPLEMENTATION INCOMPLETE
+    # THIS IS WHAT IS GOING TO BE CALLED IN MY TEST SCRIPT
+@app.route('/api/v1/getJsonData',methods=['POST'])
+def getJobData():
+    # Print statement used for debugging purposes
+    print("request recieved")
+    
+
 # This line below runs the app
 app.run()

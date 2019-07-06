@@ -4,11 +4,13 @@ import re as regex
 import sys
 from collections import Counter
 from pprint import pprint
-from docx import Document
+
 import numpy as np
+from docx import Document
 from gensim.summarization import keywords
 
 from DataProcessor import *
+
 #endregion
 
 '''Helper function to check for either stemmed or unstemmed terms and return a list of unique
@@ -121,6 +123,9 @@ def main():
 
     processed_jobs_all_bigrams = dp.get_all_bigrams(processed_jobs_no_bigrams, 3)
 
+    
+
+    # END OF PRE-PROCESSING SECTION
     # process tf-idf for the whole resume
     # x = the jobs
     # y = the resume
@@ -128,9 +133,6 @@ def main():
     x1, y1, features = dp.tf_idf(processed_jobs_all_bigrams, resumeStrUpdated)
 
     similarity_score_whole = dp.get_cosine_similarity(x1, y1)
-
-    # END OF PRE-PROCESSING SECTION
-
     # BEGIN OUTPUTTING RESULTS
 
     # retrieve the top 5 job indices using argsort
@@ -275,7 +277,8 @@ def main():
         json_data[int(indice)]["Missing_keywords"] = [keyword for keyword in nonMatchesPerTop5Jobs[i][1] if
                                                  keyword in possibleMissingSkillsLowered]
         json_data[int(indice)]["JobUrl"] = originalJobs[indice]["job_url"]
-    #Export data as JSON
-    with open("wwwroot/Data/data.json","w") as output:
-        json.dump(json_data,output)
+    
+    # Print out the data for debugging purposes
+    print(json_data)
+
 main()
