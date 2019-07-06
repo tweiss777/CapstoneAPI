@@ -59,7 +59,7 @@ def process_resume(resume):
 
 
 
-
+# This is the main algorithm
 def main():
     containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
     # BEGIN SECTION FOR PRE-PROCESSING
