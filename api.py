@@ -96,8 +96,14 @@ def api_id_post():
 def getJobData():
     # Print statement used for debugging purposes
     print("request recieved")
-
     
+    # Parameters to pass to function
+    query = request.json['query']
+    zipcode = request.json['zipcode']
+    resumeStr = request.json['resume']
+    
+    # response from the capstone algorithm
+    response = retrieveApiData(query,zipcode,resumeStr)
     
 
 # This line below runs the app
