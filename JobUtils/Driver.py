@@ -9,7 +9,7 @@ import numpy as np
 from docx import Document
 from gensim.summarization import keywords
 
-from DataProcessor import *
+from JobUtils.DataProcessor import *
 
 #endregion
 
@@ -62,17 +62,17 @@ def process_resume(resume):
 
 
 # This is the main algorithm
-def main():
+def main(jobSearch,zipcode,resumeFile):
     containsNumsSpecialChars = r'^[!@#$%^&*(),.?":{}|<>0-9]*$'
     # BEGIN SECTION FOR PRE-PROCESSING
 
     # initialize the data processor object
     dp = DataProcessor()
     
-    # System args for query,zipcode, and resume
-    jobSearch = sys.argv[1]
-    zipcode = sys.argv[2]
-    resumeFile = sys.argv[3]
+    # # System args for query,zipcode, and resume
+    # jobSearch = sys.argv[1]
+    # zipcode = sys.argv[2]
+    # resumeFile = sys.argv[3]
     
     # Get the jobs from indeed.com
     jobs, jobs2 = dp.get_jobs(jobSearch, zipcode, 10)
@@ -280,5 +280,4 @@ def main():
     
     # Print out the data for debugging purposes
     print(json_data)
-
-main()
+    return json_data
