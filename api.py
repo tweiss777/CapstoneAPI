@@ -103,8 +103,8 @@ def getJobData():
     resumeStr = request.json['resume']
     
     # response from the capstone algorithm
-    response = retrieveApiData(query,zipcode,resumeStr)
-    
+    results = retrieveApiData(query,zipcode,resumeStr)
+    return jsonify(results)
 
 # This line below runs the app
 app.run()

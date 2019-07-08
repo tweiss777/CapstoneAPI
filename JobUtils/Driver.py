@@ -75,8 +75,10 @@ def main(jobSearch,zipcode,resumeFile):
     # resumeFile = sys.argv[3]
     
     # Get the jobs from indeed.com
+    print("Getting jobs")
     jobs, jobs2 = dp.get_jobs(jobSearch, zipcode, 10)
     originalJobs = jobs
+    print("Jobs retrieved")
     for i in range(len(jobs)):
         jobs[i]["description"] = dp.joinByRegex(jobs[i]["description"])
 
@@ -86,8 +88,7 @@ def main(jobSearch,zipcode,resumeFile):
     # strip certain parts of speech
     jobs2_bigrams_processed = dp.process_jobs_paragraphs(jobs2_bigrams)
 
-    # load the resume up as a doc or docx file
-    resumeStr = process_resume(resumeFile, False)
+    resumeStr = resumeFile
     resumeStr = dp.joinByRegex(resumeStr)
 
     # This segregates the paragraphs in the resume
@@ -267,17 +268,21 @@ def main(jobSearch,zipcode,resumeFile):
 
 
     # JSON DATA NEEDS TO BE RESTRUCTURED
-    json_data = {}
+    data_dict = {}
+    json_data = []
     possibleMissingSkillsLowered = [t.lower() for t in possibleMissingSkillsUpdated2]
     for i, indice in enumerate(top_indices):
-        json_data[int(indice)] = {}
-        json_data[int(indice)]["Title"] = originalJobs[indice]["title"]
-        json_data[int(indice)]["Description"] = originalJobs[indice]["description"]
-        json_data[int(indice)]["Matching_keywords"] = [keyword for keyword in properNounsResumeNTop5Jobs[i][1]]
-        json_data[int(indice)]["Missing_keywords"] = [keyword for keyword in nonMatchesPerTop5Jobs[i][1] if
+        
+        data_dict[int(indice)] = {}
+        data_dict[int(indice)]["Title"] = originalJobs[indice]["title"]
+        data_dict[int(indice)]["Description"] = originalJobs[indice]["description"]
+        data_dict[int(indice)]["Matching_keywords"] = [keyword for keyword in properNounsResumeNTop5Jobs[i][1]]
+        data_dict[int(indice)]["Missing_keywords"] = [keyword for keyword in nonMatchesPerTop5Jobs[i][1] if
                                                  keyword in possibleMissingSkillsLowered]
-        json_data[int(indice)]["JobUrl"] = originalJobs[indice]["job_url"]
+        data_dict[int(indice)]["JobUrl"] = originalJobs[indice]["job_url"]
     
-    # Print out the data for debugging purposes
+    for jobID, info in data_dict.items():
+        json_data.append(info)    
+
     print(json_data)
     return json_data
