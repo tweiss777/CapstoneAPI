@@ -103,3 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 .vscode/*
+
+# API KEY (Do not share with anyone!)
+authHeaderKey.txt
