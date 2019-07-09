@@ -12,7 +12,7 @@ app.config["DEBUG"] = True
     Returns json data"""
     # IMPLEMENTATION INCOMPLETE
     # THIS IS WHAT IS GOING TO BE CALLED IN MY TEST SCRIPT
-@app.route('/api/v1/getJsonData',methods=['POST'])
+@app.route('/api/v1/bestjobs',methods=['POST'])
 def getJobData():
     correctKey = "SSTFZ05I7GYVFVTV9Y4S7DCQOUQ0Y1VHNM6AOS2XHRUUCVG8A7JE15FH8KR3SFWVQ1HH92VD91LE7D7U8U2YTAFL5VAQBM6CMU7V"
     # Add request headers
