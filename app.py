@@ -32,4 +32,5 @@ def getJobData():
         return jsonify({"Message":"Access denied,"}),401
 
 # This line below runs the app
-app.run()
+if __name__ == "__main__":
+    app.run()
