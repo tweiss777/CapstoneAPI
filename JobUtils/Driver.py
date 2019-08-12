@@ -4,10 +4,10 @@ import re as regex
 import sys
 from collections import Counter
 from pprint import pprint
-
+import nltk
 import numpy as np
 from docx import Document
-from gensim.summarization import keywords
+# from gensim.summarization import keywords
 
 from JobUtils.DataProcessor import *
 
@@ -103,14 +103,14 @@ def main(jobSearch,zipcode,resumeFile):
     # resumeListUpdated = dp.strip_resume_stopwords_punctuation_pos(resumeList)
 
     
-    # get potential keywords filter by pos
+    # get potential keywords filter by pos (NO LONGER USED GOING TO BE REMOVED IN FUTURE COMMITS)
     # resume_keywords = dp.filter_pos(resumeStrUpdated, ["NN", "NNS", "NNP", "NNPS"])
     # resume_keywords = list(set(resume_keywords))
 
-    # #getting keywords via gensim,
-    resume_keywords = keywords(" ".join(w for w in resumeStrUpdated), split="\n")
-    resume_keywords = [w[0] for w in nltk.pos_tag(resume_keywords) if w[1] in ["NN", "NNS", "NNP", "NNPS"]]
-    resume_keywords = [w for w in resume_keywords if bool(regex.match(containsNumsSpecialChars, w)) is False]
+    # #getting keywords via gensim, (NO LONGER USED GOING TO BE REMOVED IN FUTURE COMMITS)
+    # resume_keywords = keywords(" ".join(w for w in resumeStrUpdated), split="\n")
+    # resume_keywords = [w[0] for w in nltk.pos_tag(resume_keywords) if w[1] in ["NN", "NNS", "NNP", "NNPS"]]
+    # resume_keywords = [w for w in resume_keywords if bool(regex.match(containsNumsSpecialChars, w)) is False]
 
     # pre process the jobs wihtout the bigrams
     processed_jobs = dp.process_jobs(jobs)
