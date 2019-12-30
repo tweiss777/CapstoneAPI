@@ -4,6 +4,7 @@ from flask import jsonify, request
 from rq import Queue
 from rq.job import Job
 from rq.registry import FinishedJobRegistry, StartedJobRegistry
+from worker import conn
 from JobUtils.Driver import main as retrieveApiData
 
 # Create the app
@@ -13,7 +14,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 # initialize the redis worker connection
-redisConnection = redis.Redis()
+redisConnection = conn
 
 # initialize the queue
 queue = Queue(connection=redisConnection)
